@@ -1,0 +1,920 @@
+/* ============================================
+   YENİ: CSS Dəyişənləri (rənglər bir yerdə)
+   Rəngi bir dəfə burada dəyişsən, bütün saytda dəyişir
+   ============================================ */
+:root {
+    --yasil: #1b4d2e;
+    --yasil-tund: #143721;
+    --vurgu: #1b4d2e;         /* yaşıl yazılar üçün */
+    --fon: #f8fafc;           /* səhifənin fonu */
+    --kart: #ffffff;          /* kartların fonu */
+    --metn: #0f172a;          /* əsas yazı rəngi */
+    --boz: #64748b;           /* ikinci dərəcəli yazı */
+    --xett: #e2e8f0;          /* sərhəd xətləri */
+    --sekil-fon: #f1f5f9;
+}
+
+* {
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: var(--fon);
+    color: var(--metn);
+    font-family: 'Inter', 'Segoe UI', Roboto, Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+h1, h2, h3 {
+    font-family: 'Montserrat', 'Inter', 'Segoe UI', sans-serif;
+}
+
+/* Header Bölməsi - Böyük və Samballı */
+header {
+    background-color: var(--kart);
+    border-bottom: 3px solid var(--yasil);
+    padding: 20px 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    transition: background-color 0.4s ease, padding 0.3s ease;
+}
+
+/* YENİ: Aşağı sürüşdürəndə header kiçilir */
+header.kicik {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+header.kicik .sayt-loqosu {
+    width: 55px;
+    height: 55px;
+}
+
+.loqo-sahesi {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.sayt-loqosu {
+    width: 80px;
+    height: 80px;
+    border-radius: 12px;
+    object-fit: contain;
+    transition: width 0.3s ease, height 0.3s ease;
+}
+
+header h1 {
+    font-size: 32px;
+    margin: 0;
+    color: var(--metn);
+    font-weight: 800;
+    letter-spacing: -0.5px;
+}
+
+.header-sag {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+
+.sebet-qutusu {
+    background-color: var(--yasil);
+    color: #ffffff;
+    padding: 14px 28px;
+    border-radius: 10px;
+    font-weight: 700;
+    cursor: pointer;
+    font-size: 16px;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 10px rgba(27, 77, 46, 0.2);
+    user-select: none;
+    white-space: nowrap;   /* yazı iki sətrə bölünməsin */
+}
+
+.sebet-qutusu:hover {
+    background-color: var(--yasil-tund);
+    transform: translateY(-2px);
+}
+
+/* YENİ: Məhsul əlavə olunanda səbət "atılır" */
+.sebet-qutusu.titre {
+    animation: titreme 0.5s ease;
+}
+
+@keyframes titreme {
+    0%   { transform: scale(1); }
+    30%  { transform: scale(1.15) rotate(-4deg); }
+    60%  { transform: scale(0.95) rotate(3deg); }
+    100% { transform: scale(1); }
+}
+
+.menyu-ikona {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 36px;
+    height: 26px;
+    cursor: pointer;
+}
+
+.menyu-ikona .xett {
+    height: 4px;
+    width: 100%;
+    background-color: var(--vurgu);
+    border-radius: 4px;
+    transition: 0.3s;
+}
+
+.menyu-ikona:hover .xett {
+    background-color: var(--metn);
+}
+
+/* YENİ: Menyu artıq birdən yox, yumşaq animasiya ilə açılır */
+.menyu-paneli {
+    position: absolute;
+    top: 100%;
+    right: 50px;
+    width: 240px;
+    margin-top: 10px;
+    background-color: var(--kart);
+    border: 2px solid var(--yasil);
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-15px);
+    transition: all 0.3s ease;
+}
+
+.menyu-paneli.aktiv {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.menyu-linkleri {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.menyu-linkleri li {
+    margin-bottom: 16px;
+}
+
+.menyu-linkleri li:last-child {
+    margin-bottom: 0;
+}
+
+.menyu-linkleri a {
+    color: var(--metn);
+    text-decoration: none;
+    font-size: 17px;
+    font-weight: 700;
+    display: block;
+    transition: color 0.2s, padding-left 0.2s;
+}
+
+.menyu-linkleri a:hover {
+    color: var(--vurgu);
+    padding-left: 8px;
+}
+
+/* Hero / Haqqımızda Bölməsi - Böyük Şəkil və Mətn Sahəsi */
+.hero-bolmesi {
+    position: relative;
+    width: 100%;
+    min-height: 80vh; /* Ekranın 80%-i qədər hündürlük */
+    background: url("jafilkomanda.png") center/cover no-repeat;
+    background-color: #0f172a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(180deg, rgba(15, 23, 42, 0.8) 0%, rgba(15, 23, 42, 0.6) 100%);
+}
+
+.hero-mezmun {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    color: #ffffff;
+    max-width: 900px;
+    padding: 40px 20px;
+    animation: yuxariGel 1s ease;
+}
+
+/* YENİ: Hero yazıları aşağıdan yuxarı gəlir */
+@keyframes yuxariGel {
+    from { opacity: 0; transform: translateY(40px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* YENİ: "3D PRINT & DESIGN STUDIO" nişanı */
+.hero-badge {
+    display: inline-block;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 8px 18px;
+    border-radius: 50px;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 3px;
+}
+
+.hero-mezmun h2 {
+    font-size: 48px;
+    margin-bottom: 20px;
+    font-weight: 800;
+    line-height: 1.2;
+}
+
+.hero-mezmun p {
+    font-size: 22px;
+    line-height: 1.6;
+    margin-bottom: 35px;
+    color: #cbd5e1;
+    font-weight: 400;
+}
+
+/* YENİ: Yazı effekti sətri */
+.hero-mezmun .yazi-effekti {
+    color: #4ade80;
+    font-weight: 700;
+    font-size: 26px;
+    min-height: 40px;
+    margin-bottom: 10px;
+}
+
+.kursor {
+    animation: yanibSon 0.8s infinite;
+}
+
+@keyframes yanibSon {
+    0%, 100% { opacity: 1; }
+    50%      { opacity: 0; }
+}
+
+.hero-btn {
+    display: inline-block;
+    background-color: var(--yasil);
+    color: #ffffff;
+    padding: 18px 40px;
+    border-radius: 12px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 18px;
+    border: 2px solid #ffffff;
+    transition: all 0.3s ease;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+.hero-btn:hover {
+    background-color: #ffffff;
+    color: var(--yasil);
+    transform: translateY(-3px);
+}
+
+/* YENİ: Üstünlüklər bölməsi */
+.ustunlukler {
+    max-width: 1300px;
+    margin: -60px auto 0 auto;   /* mənfi margin: kartlar hero-nun üstünə çıxır */
+    padding: 0 20px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+    position: relative;
+    z-index: 2;
+}
+
+.ustunluk-karti {
+    background-color: var(--kart);
+    border-radius: 18px;
+    padding: 30px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    border-top: 4px solid var(--yasil);
+    transition: transform 0.3s ease, background-color 0.4s ease;
+}
+
+.ustunluk-karti:hover {
+    transform: translateY(-6px);
+}
+
+.ustunluk-ikona {
+    font-size: 40px;
+    margin-bottom: 10px;
+}
+
+.ustunluk-karti h3 {
+    margin: 0 0 8px 0;
+    font-size: 20px;
+}
+
+.ustunluk-karti p {
+    margin: 0;
+    color: var(--boz);
+}
+
+/* Mağaza Bölməsi - Geniş Konteyner və İri Kartlar */
+main {
+    margin-top: 70px;
+    max-width: 1300px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0 20px;
+}
+
+.bolme-basliq {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.bolme-basliq h2 {
+    color: var(--vurgu);
+    font-size: 36px;
+    margin-bottom: 12px;
+    font-weight: 800;
+}
+
+.bolme-basliq p {
+    color: var(--boz);
+    font-size: 18px;
+    margin: 0;
+}
+
+/* YENİ: Axtarış və sıralama paneli */
+.alet-paneli {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 35px;
+}
+
+.alet-paneli input,
+.alet-paneli select,
+.elaqe-formu input,
+.elaqe-formu textarea {
+    font-family: inherit;
+    font-size: 16px;
+    padding: 14px 18px;
+    border: 2px solid var(--xett);
+    border-radius: 10px;
+    background-color: var(--kart);
+    color: var(--metn);
+    outline: none;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.alet-paneli input {
+    flex: 1;   /* axtarış xanası qalan bütün yeri tutur */
+}
+
+.alet-paneli input:focus,
+.alet-paneli select:focus,
+.elaqe-formu input:focus,
+.elaqe-formu textarea:focus {
+    border-color: var(--yasil);
+    box-shadow: 0 0 0 4px rgba(27, 77, 46, 0.15);
+}
+
+.tapilmadi {
+    display: none;
+    text-align: center;
+    font-size: 20px;
+    color: var(--boz);
+    padding: 40px 0;
+}
+
+/* Məhsul Şəbəkəsi (Yan-yana maksimum 3 böyük kart) */
+.mehsullar-qutusu {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 35px;
+}
+
+.mehsul-karti {
+    background-color: var(--kart);
+    border: 1px solid var(--xett);
+    border-radius: 18px;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, background-color 0.4s ease;
+}
+
+.mehsul-karti:hover {
+    transform: translateY(-8px);
+    border-color: var(--yasil);
+    box-shadow: 0 15px 30px rgba(27, 77, 46, 0.15);
+}
+
+.mehsul-sekil-qutusu {
+    width: 100%;
+    height: 240px;
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 18px;
+    background-color: var(--sekil-fon);
+}
+
+.mehsul-sekil-qutusu img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    cursor: zoom-in;
+    transition: transform 0.5s ease;
+}
+
+/* YENİ: Kartın üstünə gələndə şəkil yaxınlaşır */
+.mehsul-karti:hover .mehsul-sekil-qutusu img {
+    transform: scale(1.08);
+}
+
+.mehsul-karti h3 {
+    margin: 10px 0;
+    font-size: 22px;
+    color: var(--metn);
+    font-weight: 700;
+}
+
+.tesvir {
+    color: var(--boz);
+    font-size: 15px;
+    margin-bottom: 22px;
+    line-height: 1.5;
+}
+
+.kart-alt {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    margin-top: auto;
+}
+
+.qiymet {
+    color: var(--vurgu);
+    font-weight: 800;
+    font-size: 24px;
+}
+
+button {
+    background-color: var(--yasil);
+    color: #ffffff;
+    border: none;
+    padding: 14px 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-family: inherit;
+    font-weight: 700;
+    font-size: 15px;
+    transition: background 0.2s ease, transform 0.2s ease;
+}
+
+button:hover {
+    background-color: var(--yasil-tund);
+}
+
+button:active {
+    transform: scale(0.95);
+}
+
+/* YENİ: Sürüşdürəndə görünmə animasiyası */
+/* "translate" xassəsi "transform"dan ayrıdır, ona görə hover effekti pozulmur */
+.gorunme {
+    opacity: 0;
+    translate: 0 50px;
+    transition: opacity 0.7s ease, translate 0.7s ease;
+}
+
+.mehsul-karti.gorunme {
+    transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease,
+                background-color 0.4s ease, opacity 0.7s ease, translate 0.7s ease;
+}
+
+.gorunme.goruldu {
+    opacity: 1;
+    translate: 0 0;
+}
+
+/* YENİ: Əlaqə bölməsi */
+.elaqe-bolmesi {
+    max-width: 700px;
+    margin: 90px auto 0 auto;
+    padding: 0 20px;
+}
+
+/* YENİ: Telefon / WhatsApp kartları */
+.elaqe-kartlari {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.elaqe-karti {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 18px 20px;
+    background-color: var(--kart);
+    border: 2px solid var(--xett);
+    border-radius: 14px;
+    text-decoration: none;
+    color: var(--metn);
+    transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.elaqe-karti:hover {
+    border-color: var(--yasil);
+    transform: translateY(-3px);
+}
+
+.elaqe-ikona {
+    font-size: 28px;
+}
+
+.elaqe-karti small {
+    display: block;
+    color: var(--boz);
+    font-size: 13px;
+}
+
+.elaqe-karti b {
+    font-size: 18px;
+    color: var(--vurgu);
+}
+
+.elaqe-formu {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    background-color: var(--kart);
+    padding: 30px;
+    border-radius: 18px;
+    border: 1px solid var(--xett);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.05);
+}
+
+.elaqe-formu textarea {
+    resize: vertical;
+}
+
+.form-xeta {
+    margin: 0;
+    min-height: 20px;
+    color: #dc2626;
+    font-weight: 600;
+}
+
+.form-xeta.ugurlu {
+    color: var(--vurgu);
+}
+
+/* YENİ: Footer */
+footer {
+    margin-top: 90px;
+    padding: 30px 20px;
+    text-align: center;
+    background-color: var(--yasil);
+    color: #ffffff;
+}
+
+footer p {
+    margin: 0;
+    font-weight: 600;
+}
+
+footer .footer-tel {
+    margin-top: 8px;
+}
+
+.footer-tel a {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.footer-tel a:hover {
+    text-decoration: underline;
+}
+
+/* Göndərilən zaman düymə sönük görünür */
+button:disabled {
+    opacity: 0.6;
+    cursor: wait;
+}
+
+/* YENİ: Səbət paneli */
+.qara-fon {
+    position: fixed;
+    inset: 0;   /* top, right, bottom, left = 0 */
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1500;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.sebet-paneli {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 400px;
+    max-width: 100%;
+    height: 100%;
+    background-color: var(--kart);
+    z-index: 1600;
+    display: flex;
+    flex-direction: column;
+    box-shadow: -10px 0 30px rgba(0, 0, 0, 0.2);
+    transform: translateX(100%);   /* başlanğıcda ekrandan kənarda */
+    transition: transform 0.4s ease;
+}
+
+.sebet-paneli.acik {
+    transform: translateX(0);
+}
+
+.qara-fon.acik {
+    opacity: 1;
+    visibility: visible;
+}
+
+.sebet-basliq {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 25px;
+    border-bottom: 1px solid var(--xett);
+}
+
+.sebet-basliq h3 {
+    margin: 0;
+    font-size: 22px;
+}
+
+.bagla-duymesi {
+    background-color: transparent;
+    color: var(--metn);
+    font-size: 22px;
+    padding: 5px 10px;
+}
+
+.bagla-duymesi:hover {
+    background-color: var(--sekil-fon);
+}
+
+.sebet-siyahisi {
+    list-style: none;
+    margin: 0;
+    padding: 15px 25px;
+    flex: 1;
+    overflow-y: auto;   /* çox məhsul olanda sürüşdürmək olur */
+}
+
+.sebet-mehsulu {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--xett);
+}
+
+.sebet-mehsulu img {
+    width: 60px;
+    height: 60px;
+    border-radius: 10px;
+    object-fit: cover;
+}
+
+.sebet-melumat {
+    flex: 1;
+}
+
+.sebet-melumat h4 {
+    margin: 0 0 4px 0;
+    font-size: 15px;
+}
+
+.sebet-melumat span {
+    color: var(--vurgu);
+    font-weight: 700;
+}
+
+.say-idaresi {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.say-idaresi button {
+    width: 30px;
+    height: 30px;
+    padding: 0;
+    font-size: 16px;
+}
+
+.sil-duymesi {
+    background-color: transparent;
+    font-size: 18px;
+    padding: 4px;
+}
+
+.sil-duymesi:hover {
+    background-color: transparent;
+    transform: scale(1.2);
+}
+
+.bos-sebet {
+    text-align: center;
+    color: var(--boz);
+    padding: 40px 0;
+}
+
+.sebet-alt {
+    padding: 20px 25px;
+    border-top: 1px solid var(--xett);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.cem-setri {
+    display: flex;
+    justify-content: space-between;
+    font-size: 20px;
+    font-weight: 800;
+    margin-bottom: 5px;
+}
+
+.temizle-duymesi {
+    background-color: transparent;
+    color: #dc2626;
+    border: 2px solid #dc2626;
+}
+
+.temizle-duymesi:hover {
+    background-color: #dc2626;
+    color: #ffffff;
+}
+
+/* YENİ: Şəkil modalı */
+.sekil-modal {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.85);
+    z-index: 2000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    cursor: zoom-out;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.sekil-modal.acik {
+    opacity: 1;
+    visibility: visible;
+}
+
+.sekil-modal img {
+    max-width: 90%;
+    max-height: 80vh;
+    border-radius: 16px;
+    transform: scale(0.8);
+    transition: transform 0.3s ease;
+}
+
+.sekil-modal.acik img {
+    transform: scale(1);
+}
+
+.sekil-modal p {
+    color: #ffffff;
+    font-size: 20px;
+    font-weight: 700;
+    margin: 0;
+}
+
+/* YENİ: Bildiriş (toast) */
+.bildiris {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translate(-50%, 100px);
+    background-color: var(--metn);
+    color: var(--fon);
+    padding: 16px 28px;
+    border-radius: 12px;
+    font-weight: 700;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+    z-index: 2500;
+    opacity: 0;
+    transition: all 0.4s ease;
+}
+
+.bildiris.gorunur {
+    opacity: 1;
+    transform: translate(-50%, 0);
+}
+
+/* YENİ: Yuxarı qalx düyməsi */
+.yuxari-duymesi {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 55px;
+    height: 55px;
+    padding: 0;
+    border-radius: 50%;
+    font-size: 24px;
+    z-index: 900;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.yuxari-duymesi.gorunur {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Mobil / Ekran Uyğunlaşdırılması */
+@media (max-width: 1024px) {
+    .mehsullar-qutusu {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    header {
+        padding: 15px 25px;
+    }
+    .menyu-paneli {
+        right: 25px;
+    }
+    .hero-mezmun h2 {
+        font-size: 38px;
+    }
+}
+
+@media (max-width: 650px) {
+    .mehsullar-qutusu,
+    .ustunlukler,
+    .elaqe-kartlari {
+        grid-template-columns: 1fr;
+    }
+    .alet-paneli {
+        flex-direction: column;
+    }
+    .hero-mezmun h2 {
+        font-size: 30px;
+    }
+    .hero-mezmun p {
+        font-size: 16px;
+    }
+    header {
+        padding: 12px 16px;
+    }
+    header h1 {
+        font-size: 18px;
+    }
+    .loqo-sahesi {
+        gap: 10px;
+    }
+    .header-sag {
+        gap: 12px;
+    }
+    .sayt-loqosu,
+    header.kicik .sayt-loqosu {
+        width: 45px;
+        height: 45px;
+    }
+    .sebet-qutusu {
+        padding: 10px 14px;
+        font-size: 14px;
+    }
+    .menyu-paneli {
+        right: 16px;
+    }
+}

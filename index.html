@@ -1,0 +1,252 @@
+﻿<!DOCTYPE html>
+<html lang="az">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jafil & Shavi - Premium 3D Studio</title>
+
+    <!-- Premium Google Fonts İdxalı -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Inter və Montserrat Azərbaycan hərflərini (ə, ğ, ı, ö, ü, ç, ş) tam dəstəkləyir -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Yuxarı Panel -->
+    <header>
+        <div class="loqo-sahesi">
+            <img src="jafil.jpeg" alt="Jafil & Shavi Loqo" class="sayt-loqosu">
+            <h1>Jafil & Shavi</h1>
+        </div>
+
+        <div class="header-sag">
+            <!-- YENİ: Səbət qutusuna klikləyəndə səbət paneli açılır -->
+            <div class="sebet-qutusu" id="sebetQutusu" onclick="sebetiAcBagla()">
+                🛒 Səbət (<span id="sebet-sayi">0</span>)
+            </div>
+
+            <div class="menyu-ikona" onclick="menyunuAcBagla()">
+                <div class="xett"></div>
+                <div class="xett"></div>
+                <div class="xett"></div>
+            </div>
+        </div>
+
+        <nav class="menyu-paneli" id="menyuPaneli">
+            <ul class="menyu-linkleri">
+                <li><a href="#haqqimizda" onclick="menyunuAcBagla()">Haqqımızda</a></li>
+                <li><a href="#ustunlukler" onclick="menyunuAcBagla()">Niyə Biz?</a></li>
+                <li><a href="#magaza" onclick="menyunuAcBagla()">Məhsullar</a></li>
+                <li><a href="#elaqe" onclick="menyunuAcBagla()">Əlaqə</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero / Haqqımızda Bölməsi (Lüks & Böyük) -->
+    <section class="hero-bolmesi" id="haqqimizda">
+        <div class="hero-overlay"></div>
+        <div class="hero-mezmun">
+            <span class="hero-badge">3D PRINT & DESIGN STUDIO</span>
+            <h2>Yüksək Dəqiqlik Və İnovativ Çap Həlləri</h2>
+            <!-- YENİ: bu yazı JavaScript ilə hərf-hərf "yazılır" -->
+            <p class="yazi-effekti"><span id="yaziSahesi"></span><span class="kursor">|</span></p>
+            <p>Jafil & Shavi olaraq müasir texnologiyalar və premium materiallar ilə ideyalarınızı mükəmməl 3D real obyektlərə çeviririk.</p>
+            <a href="#magaza" class="hero-btn">Kolleksiyanı Kəşf Et</a>
+        </div>
+    </section>
+
+    <!-- YENİ: Üstünlüklərimiz Bölməsi -->
+    <section class="ustunlukler gorunme" id="ustunlukler">
+        <div class="ustunluk-karti">
+            <div class="ustunluk-ikona">🎯</div>
+            <h3>Yüksək Dəqiqlik</h3>
+            <p>Hər detal millimetr dəqiqliyi ilə çap olunur.</p>
+        </div>
+        <div class="ustunluk-karti">
+            <div class="ustunluk-ikona">🧵</div>
+            <h3>Premium Materiallar</h3>
+            <p>PLA+, PETG və xüsusi filamentlərdən istifadə edirik.</p>
+        </div>
+        <div class="ustunluk-karti">
+            <div class="ustunluk-ikona">💡</div>
+            <h3>Fərdi Dizayn</h3>
+            <p>İstədiyiniz ideyanı 3D obyektə çeviririk.</p>
+        </div>
+    </section>
+
+    <!-- Əsas Məhsullar Bölməsi -->
+    <main id="magaza">
+        <div class="bolme-basliq">
+            <h2>Ən Möhtəşəm Məhsullarımız</h2>
+            <p>Yüksək keyfiyyətli PLA+, PETG və xüsusi filametlərlə hazırlanmış premium kolleksiya</p>
+        </div>
+
+        <!-- YENİ: Axtarış və sıralama paneli -->
+        <div class="alet-paneli">
+            <input type="text" id="axtarisXanasi" placeholder="🔍 Məhsul axtar..." oninput="mehsullariAxtar()">
+            <select id="siralamaSecimi" onchange="mehsullariSirala()">
+                <option value="standart">Sıralama: Standart</option>
+                <option value="ucuz">Qiymət: Ucuzdan bahaya</option>
+                <option value="baha">Qiymət: Bahadan ucuza</option>
+                <option value="ad">Ada görə (A-Z)</option>
+            </select>
+        </div>
+
+        <!-- YENİ: Axtarışda heç nə tapılmasa bu yazı görünür -->
+        <p class="tapilmadi" id="tapilmadi">😕 Belə bir məhsul tapılmadı.</p>
+
+        <div class="mehsullar-qutusu" id="mehsullarQutusu">
+
+            <div class="mehsul-karti gorunme" data-qiymet="27" data-sira="1">
+                <div class="mehsul-sekil-qutusu">
+                    <img src="Sezar.png" alt="Yuri Sezar" onclick="sekliBoyut(this)">
+                </div>
+                <h3>Yuri Sezar Qələm Qabı</h3>
+                <p class="tesvir">Material: PLA+ </p>
+                <div class="kart-alt">
+                    <span class="qiymet">27 AZN</span>
+                    <button onclick="sebetaAt('Yuri Sezar Qələm Qabı', 27, 'Sezar.png')">Səbətə Əlavə Et</button>
+                </div>
+            </div>
+
+            <div class="mehsul-karti gorunme" data-qiymet="15" data-sira="2">
+                <div class="mehsul-sekil-qutusu">
+                    <img src="harry.jpg" alt="Harry Potter" onclick="sekliBoyut(this)">
+                </div>
+                <h3>Harry Potter Kitab Stendi</h3>
+                <p class="tesvir">Material: PLA+ </p>
+                <div class="kart-alt">
+                    <span class="qiymet">15 AZN</span>
+                    <button onclick="sebetaAt('Harry Potter Kitab Stendi', 15, 'harry.jpg')">Səbətə Əlavə Et</button>
+                </div>
+            </div>
+
+            <div class="mehsul-karti gorunme" data-qiymet="30" data-sira="3">
+                <div class="mehsul-sekil-qutusu">
+                    <img src="dibcek.png" alt="Dibçək" onclick="sekliBoyut(this)">
+                </div>
+                <h3>Bitki Qabı</h3>
+                <p class="tesvir">Material: PLA+</p>
+                <div class="kart-alt">
+                    <span class="qiymet">30 AZN</span>
+                    <button onclick="sebetaAt('Bitki Qabı', 30, 'dibcek.png')">Səbətə Əlavə Et</button>
+                </div>
+            </div>
+
+            <div class="mehsul-karti gorunme" data-qiymet="18" data-sira="4">
+                <div class="mehsul-sekil-qutusu">
+                    <img src="kitabsaxlayan.png" alt="Kitab Saxlayan" onclick="sekliBoyut(this)">
+                </div>
+                <h3>Kitab Saxlayan</h3>
+                <p class="tesvir">Material: PLA+</p>
+                <div class="kart-alt">
+                    <span class="qiymet">18 AZN</span>
+                    <button onclick="sebetaAt('Kitab Saxlayan', 18, 'kitabsaxlayan.png')">Səbətə Əlavə Et</button>
+                </div>
+            </div>
+
+            <div class="mehsul-karti gorunme" data-qiymet="35" data-sira="5">
+                <div class="mehsul-sekil-qutusu">
+                    <img src="catuz.png" alt="Çat üz" onclick="sekliBoyut(this)">
+                </div>
+                <h3>Parlayan Çat Üz</h3>
+                <p class="tesvir">Material: PLA+</p>
+                <div class="kart-alt">
+                    <span class="qiymet">35 AZN</span>
+                    <button onclick="sebetaAt('Parlayan Çat Üz', 35, 'catuz.png')">Səbətə Əlavə Et</button>
+                </div>
+            </div>
+
+            <div class="mehsul-karti gorunme" data-qiymet="10" data-sira="6">
+                <div class="mehsul-sekil-qutusu">
+                    <img src="urek.png" alt="Ürək Figur" onclick="sekliBoyut(this)">
+                </div>
+                <h3>Ürək Figurları</h3>
+                <p class="tesvir">Material: PLA+</p>
+                <div class="kart-alt">
+                    <span class="qiymet">10 AZN</span>
+                    <button onclick="sebetaAt('Ürək Figurları', 10, 'urek.png')">Səbətə Əlavə Et</button>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- YENİ: Əlaqə Bölməsi (menyudakı "Əlaqə" linki bura gəlir) -->
+    <section class="elaqe-bolmesi gorunme" id="elaqe">
+        <div class="bolme-basliq">
+            <h2>Bizimlə Əlaqə</h2>
+            <p>Fərdi sifariş və ya sualınız var? Bizə yazın!</p>
+        </div>
+
+        <!-- YENİ: Telefon və WhatsApp ilə əlaqə -->
+        <div class="elaqe-kartlari">
+            <a class="elaqe-karti" href="tel:+994558672327">
+                <span class="elaqe-ikona">📞</span>
+                <span>
+                    <small>Zəng edin</small>
+                    <b>055 867 23 27</b>
+                </span>
+            </a>
+            <a class="elaqe-karti" href="https://wa.me/994558672327" target="_blank">
+                <span class="elaqe-ikona">💬</span>
+                <span>
+                    <small>WhatsApp</small>
+                    <b>055 867 23 27</b>
+                </span>
+            </a>
+        </div>
+
+        <!-- Form göndəriləndə mesaj birbaşa sahibinin e-poçtuna gəlir -->
+        <form class="elaqe-formu" onsubmit="formuGonder(event)">
+            <input type="text" id="formAd" placeholder="Adınız">
+            <input type="text" id="formEmail" placeholder="E-poçt ünvanınız">
+            <textarea id="formMesaj" rows="5" placeholder="Mesajınız"></textarea>
+            <p class="form-xeta" id="formXeta"></p>
+            <button type="submit" id="formDuymesi">Mesajı Göndər</button>
+        </form>
+    </section>
+
+    <!-- YENİ: Footer (səhifənin aşağı hissəsi) -->
+    <footer>
+        <p>© <span id="il"></span> Jafil & Shavi — Premium 3D Studio</p>
+        <p class="footer-tel">📞 <a href="tel:+994558672327">055 867 23 27</a></p>
+    </footer>
+
+    <!-- YENİ: Səbət paneli (sağdan açılır) -->
+    <div class="qara-fon" id="qaraFon" onclick="sebetiAcBagla()"></div>
+    <aside class="sebet-paneli" id="sebetPaneli">
+        <div class="sebet-basliq">
+            <h3>🛒 Səbətim</h3>
+            <button class="bagla-duymesi" onclick="sebetiAcBagla()">✕</button>
+        </div>
+        <ul class="sebet-siyahisi" id="sebetSiyahisi"></ul>
+        <div class="sebet-alt">
+            <div class="cem-setri">
+                <span>Cəmi:</span>
+                <span id="cemQiymet">0 AZN</span>
+            </div>
+            <button class="sifaris-duymesi" onclick="sifarisVer()">Sifariş Ver</button>
+            <button class="temizle-duymesi" onclick="sebetiTemizle()">Səbəti Təmizlə</button>
+        </div>
+    </aside>
+
+    <!-- YENİ: Şəkli böyük göstərən pəncərə (modal) -->
+    <div class="sekil-modal" id="sekilModal" onclick="modaliBagla()">
+        <img id="modalSekil" src="" alt="Böyük şəkil">
+        <p id="modalYazi"></p>
+    </div>
+
+    <!-- YENİ: Bildiriş (toast) mesajı -->
+    <div class="bildiris" id="bildiris"></div>
+
+    <!-- YENİ: Yuxarı qalx düyməsi -->
+    <button class="yuxari-duymesi" id="yuxariDuymesi" onclick="yuxariQalx()">↑</button>
+
+    <script src="script.js"></script>
+</body>
+</html>
