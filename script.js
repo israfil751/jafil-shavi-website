@@ -403,6 +403,8 @@ let sican = { x: null, y: null };         // siçanın yeri (ekranda deyilsə nu
 const ELAQE_MESAFESI = 130;   // nöqtələr bundan yaxındırsa, aralarında xətt çəkilir
 const SICAN_MESAFESI = 180;   // siçan bu məsafədə nöqtələrə təsir edir
 const MAKS_NOQTE = 160;       // ekranda ən çox neçə nöqtə ola bilər
+const SURET = 0.3;            // nöqtələrin sürəti (böyük rəqəm = sürətli)
+const KLIK_SURETI = 1.5;      // klikdə yaranan nöqtələrin sürəti
 
 // Kətanın ölçüsünü ekranın ölçüsünə bərabər edir
 function kanvasiOlcule() {
@@ -434,7 +436,7 @@ function noqteleriYarat() {
     for (let i = 0; i < say; i++) {
         let x = Math.random() * window.innerWidth;
         let y = Math.random() * window.innerHeight;
-        noqteler.push(noqteYarat(x, y, 0.8));
+        noqteler.push(noqteYarat(x, y, SURET));
     }
 }
 
@@ -471,8 +473,8 @@ function fonuCek() {
             let m = mesafe(n.x, n.y, sican.x, sican.y);
             if (m < SICAN_MESAFESI && m > 0) {   // m > 0: sıfıra bölmə olmasın
                 let guc = (SICAN_MESAFESI - m) / SICAN_MESAFESI;   // yaxın = güclü (0...1)
-                n.x = n.x + (n.x - sican.x) / m * guc * 2;
-                n.y = n.y + (n.y - sican.y) / m * guc * 2;
+                n.x = n.x + (n.x - sican.x) / m * guc * 0.8;
+                n.y = n.y + (n.y - sican.y) / m * guc * 0.8;
 
                 qelem.strokeStyle = "rgba(34, 139, 74, " + (guc * 0.8) + ")";
                 qelem.lineWidth = 1.2;
@@ -525,7 +527,7 @@ document.addEventListener("mouseleave", function () {
 // Klikləyəndə həmin yerdə 6 yeni nöqtə "partlayır"
 window.addEventListener("click", function (event) {
     for (let i = 0; i < 6; i++) {
-        noqteler.push(noqteYarat(event.clientX, event.clientY, 4));
+        noqteler.push(noqteYarat(event.clientX, event.clientY, KLIK_SURETI));
     }
     // Nöqtə çox olarsa, ən köhnələri silirik ki, sayt yavaşlamasın
     while (noqteler.length > MAKS_NOQTE) {
