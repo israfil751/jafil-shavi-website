@@ -9,6 +9,7 @@ Proqramlaşdırmanın əsasları fənni üzrə ev tapşırığı: 3D çap məhsu
 | `index.html` | Saytın quruluşu (HTML) |
 | `style.css` | Görünüş və animasiyalar (CSS) |
 | `script.js` | Səbət, axtarış, sıralama, form və digər funksiyalar (JavaScript) |
+| `bitki.svg` | Kənarlardakı bitki naxışı (vektor şəkil) |
 | `Izah-Jafil-Shavi.pdf` | Bütün əlavələrin və funksiyaların ətraflı izahı |
 
 ## Əsas xüsusiyyətlər

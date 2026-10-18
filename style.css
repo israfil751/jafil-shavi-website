@@ -31,6 +31,35 @@ h1, h2, h3 {
     font-family: 'Montserrat', 'Inter', 'Segoe UI', sans-serif;
 }
 
+/* YENİ: Kənarlarda bitki naxışı (sarmaşıq)
+   ::before — sol kənar, ::after — sağ kənar.
+   HTML-ə heç nə əlavə etmədən CSS ilə "saxta" element yaradırıq. */
+body::before,
+body::after {
+    content: "";                     /* psevdo-element görünsün deyə mütləqdir */
+    position: fixed;                 /* sürüşdürəndə yerində qalır */
+    top: 0;
+    bottom: 0;
+    width: 140px;
+    background-image: url("bitki.svg");
+    background-repeat: repeat-y;     /* şəkil yalnız şaquli təkrarlanır */
+    background-size: 140px 320px;
+    opacity: 0.55;
+    pointer-events: none;           /* klikləri maneə törətmir */
+    z-index: -1;                     /* bütün məzmunun arxasında qalır */
+    /* Yarpaqların tərpənməsi bitki.svg faylının içindəki animasiyadır */
+}
+
+body::before {
+    left: 0;
+}
+
+body::after {
+    right: 0;
+    transform: scaleX(-1);           /* sol naxışın güzgü əksi (öz mərkəzi ətrafında) */
+    background-position: 0 160px;    /* yarpaqlar sol tərəflə eyni hündürlükdə olmasın */
+}
+
 /* Header Bölməsi - Böyük və Samballı */
 header {
     background-color: var(--kart);
@@ -876,6 +905,16 @@ button:disabled {
     .hero-mezmun h2 {
         font-size: 38px;
     }
+    /* Kiçik ekranda naxış nazik və daha solğun olur ki, məzmuna mane olmasın */
+    body::before,
+    body::after {
+        width: 70px;
+        background-size: 70px 160px;
+        opacity: 0.25;
+    }
+    body::after {
+        background-position: 0 80px;
+    }
 }
 
 @media (max-width: 650px) {
@@ -916,5 +955,10 @@ button:disabled {
     }
     .menyu-paneli {
         right: 16px;
+    }
+    /* Telefonda yer azdır — naxışı gizlədirik */
+    body::before,
+    body::after {
+        display: none;
     }
 }
