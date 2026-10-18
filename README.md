@@ -9,13 +9,13 @@ Proqramlaşdırmanın əsasları fənni üzrə ev tapşırığı: 3D çap məhsu
 | `index.html` | Saytın quruluşu (HTML) |
 | `style.css` | Görünüş və animasiyalar (CSS) |
 | `script.js` | Səbət, axtarış, sıralama, form və digər funksiyalar (JavaScript) |
-| `bitki.svg` | Kənarlardakı bitki naxışı (vektor şəkil) |
 | `Izah-Jafil-Shavi.pdf` | Bütün əlavələrin və funksiyaların ətraflı izahı |
 
 ## Əsas xüsusiyyətlər
 
 - Səbət paneli: say (+/−), silmək, cəm qiymət, yadda saxlama (localStorage)
 - Məhsul axtarışı və sıralama (qiymətə / ada görə)
+- Fonda interaktiv nöqtələr şəbəkəsi (canvas): siçana və klikə reaksiya verir
 - Şəkli böyütmə, bildirişlər, yazı effekti, sürüşdürmə animasiyaları
 - Əlaqə formu: yoxlama + mesajın e-poçta göndərilməsi (FormSubmit)
 - Telefon və WhatsApp: 055 867 23 27
